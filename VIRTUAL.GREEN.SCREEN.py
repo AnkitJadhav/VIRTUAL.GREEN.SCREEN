@@ -6,7 +6,7 @@ cap = cv2.VideoCapture(0)
 time.sleep(2)
 
 background = 0
-for i in range(80):
+for i in range(30):
     ret, background = cap.read()
 
 while(cap.isOpened()):
@@ -32,8 +32,8 @@ while(cap.isOpened()):
 
     mask2 = cv2.bitwise_or(mask1)
 
-    res1 = cv2.bitwise_and(background, background, mask1)
-    res2 = cv2.bitwise_and(img, img, mask=mask2)
+    res1 = cv2.bitwise_or(background, background, mask1)
+    res2 = cv2.bitwise_or(img, img, mask=mask2)
     final_output = cv2.addWeighted(res1, 1, res2, 1, 0)
 
     cv2.imshow('VIRTUAL GREEN SCREEN', final_output)
