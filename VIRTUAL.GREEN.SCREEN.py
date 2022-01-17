@@ -30,10 +30,10 @@ while(cap.isOpened()):
     mask1 = cv2.morphologyEx(mask1, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8), iterations=2)
     mask1 = cv2.morphologyEx(mask1, cv2.MORPH_DILATE, np.ones((3, 3), np.uint8), iterations=1)
 
-    mask2 = cv2.bitwise_or(mask1)
+    mask2 = cv2.bitwise_not(mask1)
 
-    res1 = cv2.bitwise_or(background, background, mask1)
-    res2 = cv2.bitwise_or(img, img, mask=mask2)
+    res1 = cv2.bitwise_and(background, background, mask=mask1)
+    res2 = cv2.bitwise_and(img, img, mask=mask2)
     final_output = cv2.addWeighted(res1, 1, res2, 1, 0)
 
     cv2.imshow('VIRTUAL GREEN SCREEN', final_output)
